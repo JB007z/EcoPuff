@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
     }
 },{timestamps:true})
 
-userSchema.pre('save',async()=>{
+userSchema.pre('save',async function(){
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password,salt)
 })
@@ -37,8 +37,18 @@ userSchema.pre('save',async()=>{
 userSchema.methods.createJWT = function(){
     return jwt.sign({
         userId:this.id,name:this.username,email:this.email,admin:this.isAdmin
-    })
+    },process.env.JWT_SECRET,{expiresIn:'30d'})
 }
 
+userSchema.methods.comparePassword = async function(password){
+    try {
+        const isMatch = await bcrypt.compare(password,this.password)
+        return isMatch
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 
 module.exports = mongoose.model('User',userSchema)
