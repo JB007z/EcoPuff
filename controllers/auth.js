@@ -3,7 +3,6 @@ const {BadRequestError,NotFoundError,UnauthenticatedError} = require('../errors'
 const {StatusCodes} = require('http-status-codes')
 const register = async(req,res)=>{
     const {username,email,password} = req.body
-    console.log(req.body);
     if (!email||!username||!password){
         throw new BadRequestError("Please provide email,username and password")
     }
