@@ -63,7 +63,21 @@ const editProduct = async(req,res)=>{
 }
 
 const deleteProduct = async(req,res)=>{
-    res.status(200).json({id:req.user.id,username:req.user.username})
+    const {admin} = req.user
+    if(!admin){
+        throw new UnauthenticatedError('Invalid Credentials')
+    }
+    const productId = req.params.id
+    try {
+        const product = await Product.findOneAndDelete({_id:productId})
+        if(!product){
+            throw new BadRequestError('No product with that id')
+        }
+        res.status(StatusCodes.OK).json({product,msg:'Product Deleted'})
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 
