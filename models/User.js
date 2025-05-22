@@ -35,6 +35,8 @@ userSchema.pre('save',async function(){
 })
 
 userSchema.methods.createJWT = function(){
+    console.log(this.isAdmin);
+    
     return jwt.sign({
         userId:this.id,username:this.username,email:this.email,admin:this.isAdmin
     },process.env.JWT_SECRET,{expiresIn:'30d'})
