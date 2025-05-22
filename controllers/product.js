@@ -4,7 +4,6 @@ const Product = require('../models/product')
 const {UnauthenticatedError,BadRequestError} = require('../errors')
 
 const addProduct = async(req,res)=>{
-    console.log(req.user);
 
     const {admin,userId,username} = req.user
     if (!admin){
@@ -32,7 +31,35 @@ const getProduct = async(req,res)=>{
 }
 
 const editProduct = async(req,res)=>{
-    res.status(200).json({id:req.user.id,username:req.user.username})
+    const {admin} = req.user
+    const productId = req.params.id
+    if (!admin){
+        throw new UnauthenticatedError('Invalid Credentials')
+    }
+    const {title,desc,image,price} = req.body
+    const newProduct = {}
+    if(title){
+        newProduct.title = title
+    }
+    if(desc){
+        newProduct.desc = desc
+    }
+    if(image){
+        newProduct.image = image
+    }
+    if(price){
+        newProduct.price = price
+    }
+    try {
+        const product = await Product.findOneAndUpdate({_id:productId},{$set:newProduct},{new:true})
+        if(!product){
+            throw new BadRequestError('No product with that id')
+        }
+        res.status(StatusCodes.OK).json({product})
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 const deleteProduct = async(req,res)=>{
