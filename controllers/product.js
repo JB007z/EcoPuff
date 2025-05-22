@@ -4,11 +4,6 @@ const Product = require('../models/product')
 const {UnauthenticatedError,BadRequestError} = require('../errors')
 
 const addProduct = async(req,res)=>{
-
-    const {admin,userId,username} = req.user
-    if (!admin){
-        throw new UnauthenticatedError('Invalid Credentials')
-    }
     const {title,desc,image,price} = req.body
     if(!title||!desc||!image||!price){
         throw new BadRequestError('Invalid product')
@@ -46,11 +41,8 @@ const getProduct = async(req,res)=>{
 }
 
 const editProduct = async(req,res)=>{
-    const {admin} = req.user
     const productId = req.params.id
-    if (!admin){
-        throw new UnauthenticatedError('Invalid Credentials')
-    }
+   
     const {title,desc,image,price} = req.body
     const newProduct = {}
     if(title){
@@ -78,10 +70,6 @@ const editProduct = async(req,res)=>{
 }
 
 const deleteProduct = async(req,res)=>{
-    const {admin} = req.user
-    if(!admin){
-        throw new UnauthenticatedError('Invalid Credentials')
-    }
     const productId = req.params.id
     try {
         const product = await Product.findOneAndDelete({_id:productId})
