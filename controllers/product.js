@@ -23,11 +23,26 @@ const addProduct = async(req,res)=>{
 }
 
 const getProducts = async(req,res)=>{
-    res.status(200).json({id:req.user.id,username:req.user.username})
+    try {
+        const products = await Product.find({})
+        res.status(StatusCodes.OK).json({products,nHits:products.length})
+    } catch (error) {
+        console.log(error);
+        
+    }
 }
 
 const getProduct = async(req,res)=>{
-    res.status(200).json({id:req.user.id,username:req.user.username})
+    try {
+        const productId = req.params.id
+        const product = await Product.findOne({_id:productId})
+        if(!product){
+            throw new BadRequestError('No product with that id')
+        }
+        res.status(StatusCodes.OK).json({product})
+    } catch (error) {
+        
+    }
 }
 
 const editProduct = async(req,res)=>{
