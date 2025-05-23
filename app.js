@@ -6,18 +6,20 @@ const connectDB = require('./db/connect')
 
 //middleware
 const authUser = require('./middleware/authentication')
-
-//routes
+const isAdmin = require('./middleware/isAdmin')
+//routers
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/product')
+const cartRouter = require('./routes/cart')
+const auth = require('./middleware/authentication')
 
 app.use(express.json())
 
 app.use('/api/v1/auth',authRouter)
-app.use('/api/v1/users',authUser,userRouter)
+app.use('/api/v1/users',authUser,isAdmin,userRouter)
 app.use('/api/v1/products',authUser,productsRouter)
-
+app.use('/api/v1/carts/',authUser,cartRouter)
 
 
 const start = async()=>{
