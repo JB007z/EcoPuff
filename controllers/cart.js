@@ -12,14 +12,37 @@ const createCart = async(req,res)=>{
     if(!products){
         throw new BadRequestError('Your cart must have atleast one product')
     }
-    try {
+        const hasCart = await Cart.findOne({userId})
+        console.log(hasCart);
+        
+        if(hasCart){
+            throw new BadRequestError('User already has a cart')
+        }
         const cart = await Cart.create({userId,products})
         res.status(StatusCodes.CREATED).json({cart,msg:'Car created'})
+    } 
+
+
+const getCarts = async(req,res)=>{
+    try {
+        const carts = await Cart.find({})
+        res.status(StatusCodes.OK).json({carts,nHits:carts.length})
     } catch (error) {
-        console.log(error);
         
     }
 }
 
+const getCart = async(req,res)=>{
+    const userId = req.params.id
+    const cart = await Cart.find({userId})
+    if(!cart){
+        throw new BadRequestError('The user doesnt have a cart or the user doesnt exist')
 
-module.exports = {createCart}
+    }
+    res.status(StatusCodes.OK).json({cart})
+}
+
+
+
+
+module.exports = {createCart,getCarts,getCart}
