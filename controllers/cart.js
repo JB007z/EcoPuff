@@ -43,6 +43,18 @@ const getCart = async(req,res)=>{
 }
 
 
+const editCart = async(req,res)=>{
+    const {products} = req.body
+    const userId = req.params.id
+    if(!products||products.length===0){
+        throw new BadRequestError('There must be products')
+    }
+    const updatedCart = await Cart.findOneAndUpdate({userId},{products},{new:true})
+    if(!updatedCart){
+        throw new BadRequestError('No user with that id')
+    }
+    res.status(StatusCodes.OK).json({updatedCart})
 
+}
 
-module.exports = {createCart,getCarts,getCart}
+module.exports = {createCart,getCarts,getCart,editCart}

@@ -28,16 +28,14 @@ const getProducts = async(req,res)=>{
 }
 
 const getProduct = async(req,res)=>{
-    try {
+    
         const productId = req.params.id
         const product = await Product.findOne({_id:productId})
         if(!product){
             throw new BadRequestError('No product with that id')
         }
         res.status(StatusCodes.OK).json({product})
-    } catch (error) {
-        
-    }
+   
 }
 
 const editProduct = async(req,res)=>{
