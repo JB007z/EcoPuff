@@ -57,4 +57,17 @@ const editCart = async(req,res)=>{
 
 }
 
-module.exports = {createCart,getCarts,getCart,editCart}
+const deleteCart = async(req,res)=>{
+    const userId = req.params.id
+    try {
+        const cart = await Cart.findOneAndDelete({userId})
+        if(!cart){
+            throw new BadRequestError('No cart with that id')
+        }
+        res.status(StatusCodes.OK).json({cart,msg:'Cart deleted'})
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+module.exports = {createCart,getCarts,getCart,editCart,deleteCart}

@@ -7,12 +7,12 @@ const connectDB = require('./db/connect')
 //middleware
 const authUser = require('./middleware/authentication')
 const isAdmin = require('./middleware/isAdmin')
+
 //routers
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
-const auth = require('./middleware/authentication')
 
 app.use(express.json())
 

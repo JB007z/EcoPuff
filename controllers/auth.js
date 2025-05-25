@@ -28,7 +28,7 @@ const login = async(req,res)=>{
     
     const user = await User.findOne({email})
     if(!user){
-        throw new UnauthenticatedError('Invalid Credentials')
+        throw new UnauthenticatedError('This user doesnt exist')
     }
 
     const isMatch = await user.comparePassword(password)
