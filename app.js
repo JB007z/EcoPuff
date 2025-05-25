@@ -13,6 +13,7 @@ const authRouter = require('./routes/auth')
 const userRouter = require('./routes/user')
 const productsRouter = require('./routes/product')
 const cartRouter = require('./routes/cart')
+const orderRouter = require('./routes/order')
 
 app.use(express.json())
 
@@ -20,6 +21,7 @@ app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/users',authUser,isAdmin,userRouter)
 app.use('/api/v1/products',authUser,productsRouter)
 app.use('/api/v1/carts/',authUser,cartRouter)
+app.use('/api/v1/orders/',authUser,orderRouter)
 
 
 const start = async()=>{
