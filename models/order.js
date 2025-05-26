@@ -33,33 +33,43 @@ orderSchema.pre('save',async function(next){
     try {
         
         const productsId = this.products.map(p=>{
+            const valid = mongoose.Types.ObjectId.isValid(p.productId)
+            if(!valid){
+                throw new BadRequestError('One or more invalid products in the order(id)')
+            }
             return p.productId
         })
         const products = await Product.find({_id:{$in:productsId}})
         if(products.length!==productsId.length){
-            throw new BadRequestError('One or more invalid products in the order')
+            throw new BadRequestError('One or more invalid products in the order(id)')
         }
+        next()
     } catch (error) {
-        console.log(error);
-        
+        next(error)        
     }
-    next()
+    
 })
 
 orderSchema.pre('findOneAndUpdate',async function(next){
     try {
         const update = this.getUpdate()
-        const productIds = update.map(p=>{
+        const productIds = update.products.map(p=>{
+            const valid = mongoose.Types.ObjectId.isValid(p.productId)
+            if(!valid){
+                throw new BadRequestError('One or more invalid products in the order(id)')
+            }
+
             return p.productId
         })
-        const products = await Product.find({_id:{$in:productsId}})
-        if(products.length!==productsId.length){
-            throw new BadRequestError('One or more invalid products in the order')
+        const products = await Product.find({_id:{$in:productIds}})
+        if(products.length!==productIds.length){
+            throw new BadRequestError('One or more invalid products in the order(id)')
         }
+          next()
     } catch (error) {
-        console.log(error);
+        next(error)
     }
-    next()
+  
 })
 
 module.exports = mongoose.model('Order',orderSchema)
