@@ -14,31 +14,35 @@ const register = async(req,res)=>{
         res.status(StatusCodes.CREATED).json({token,msg:"User was created"})
 
     } catch (error) {
-        console.log(error);
-        
+        res.status(error.statusCode || 500).json({ msg: error.message });
     }
     
 }
 
 const login = async(req,res)=>{
     const {email,password} = req.body
-    if(!email||!password){
-        throw new BadRequestError("Please provide email,username and password")
-    }
+    try {
+        
+        if(!email||!password){
+            throw new BadRequestError("Please provide email,username and password")
+        }
+        
+        const user = await User.findOne({email})
+        if(!user){
+            throw new UnauthenticatedError('This user doesnt exist')
+        }
     
-    const user = await User.findOne({email})
-    if(!user){
-        throw new UnauthenticatedError('This user doesnt exist')
-    }
-
-    const isMatch = await user.comparePassword(password)
-    if(isMatch){
-        const token = user.createJWT()
-        res.status(StatusCodes.OK).json({token,msg:"User logged in"})
-    }
-    
-    else{
-        throw new UnauthenticatedError('Invalid Credentials')
+        const isMatch = await user.comparePassword(password)
+        if(isMatch){
+            const token = user.createJWT()
+            res.status(StatusCodes.OK).json({token,msg:"User logged in"})
+        }
+        
+        else{
+            throw new UnauthenticatedError('Invalid Credentials')
+        }
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ msg: error.message });
     }
 
 

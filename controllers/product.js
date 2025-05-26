@@ -5,14 +5,14 @@ const {UnauthenticatedError,BadRequestError} = require('../errors')
 
 const addProduct = async(req,res)=>{
     const {title,desc,image,price} = req.body
-    if(!title||!desc||!image||!price){
-        throw new BadRequestError('Invalid product')
-    }
     try {
+        if(!title||!desc||!image||!price){
+            throw new BadRequestError('Invalid product')
+        }
         const product = await Product.create({title,desc,image,price})
         res.status(StatusCodes.CREATED).json({product})
     } catch (error) {
-        console.log(error);
+        res.status(error.statusCode || 500).json({ msg: error.message })
         
     }
 }
@@ -22,19 +22,23 @@ const getProducts = async(req,res)=>{
         const products = await Product.find({})
         res.status(StatusCodes.OK).json({products,nHits:products.length})
     } catch (error) {
-        console.log(error);
-        
+        res.status(error.statusCode || 500).json({ msg: error.message })        
     }
 }
 
 const getProduct = async(req,res)=>{
     
         const productId = req.params.id
-        const product = await Product.findOne({_id:productId})
-        if(!product){
-            throw new BadRequestError('No product with that id')
+        try {
+            
+            const product = await Product.findOne({_id:productId})
+            if(!product){
+                throw new BadRequestError('No product with that id')
+            }
+            res.status(StatusCodes.OK).json({product})
+        } catch (error) {
+            res.status(error.statusCode || 500).json({ msg: error.message })
         }
-        res.status(StatusCodes.OK).json({product})
    
 }
 
@@ -62,7 +66,7 @@ const editProduct = async(req,res)=>{
         }
         res.status(StatusCodes.OK).json({product})
     } catch (error) {
-        console.log(error);
+        res.status(error.statusCode || 500).json({ msg: error.message })
         
     }
 }
@@ -76,8 +80,7 @@ const deleteProduct = async(req,res)=>{
         }
         res.status(StatusCodes.OK).json({product,msg:'Product Deleted'})
     } catch (error) {
-        console.log(error);
-        
+        res.status(error.statusCode || 500).json({ msg: error.message })
     }
 }
 

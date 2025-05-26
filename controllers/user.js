@@ -9,18 +9,21 @@ const getUsers = async(req,res)=>{
         const users = await User.find({})
         res.status(StatusCodes.OK).json({users,nHits:users.length})
     } catch (error) {
-        console.log(error);
-        
+        res.status(error.statusCode || 500).json({ msg: error.message })        
     }
 }
 
 const getUser = async(req,res)=>{
     const userId = req.params.id
-    const user = await User.findOne({_id:userId})
-    if(!user){
-        throw new BadRequestError('No user with that id')
+    try {
+        const user = await User.findOne({_id:userId})
+        if(!user){
+            throw new BadRequestError('No user with that id')
+        }
+        res.status(StatusCodes.OK).json({user})
+    } catch (error) {
+        res.status(error.statusCode || 500).json({ msg: error.message })
     }
-    res.status(StatusCodes.OK).json({user})
 }
 
 const updateUser = async(req,res)=>{
@@ -39,9 +42,7 @@ const updateUser = async(req,res)=>{
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(newPassword,salt)
         updatedUser.password = hashedPassword
-    }
-    console.log(updatedUser);
-    
+    }    
     try {
         const newUser = await User.findOneAndUpdate({_id:userId},{$set:updatedUser},{new:true})
         if (!newUser){
@@ -49,7 +50,7 @@ const updateUser = async(req,res)=>{
         }
         res.status(StatusCodes.OK).json({newUser,msg:'User edited'})
     } catch (error) {
-        console.log(error);
+        res.status(error.statusCode || 500).json({ msg: error.message })
         
     }
 }
@@ -64,7 +65,7 @@ const deleteUser = async(req,res)=>{
         }
         res.status(StatusCodes.OK).json({user,msg:'User deleted'})
     } catch (error) {
-        console.log(error);
+        res.status(error.statusCode || 500).json({ msg: error.message })
         
     }
 }
