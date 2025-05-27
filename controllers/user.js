@@ -18,7 +18,7 @@ const getUser = async(req,res)=>{
     try {
         const user = await User.findOne({_id:userId})
         if(!user){
-            throw new BadRequestError('No user with that id')
+            throw new BadRequestError('No user with those credentials')
         }
         res.status(StatusCodes.OK).json({user})
     } catch (error) {
@@ -28,15 +28,7 @@ const getUser = async(req,res)=>{
 
 const updateUser = async(req,res)=>{
     const userId = req.params.id
-    const allowedFields = ['username','email','isAdmin']
-    const updatedUser = {}
-    console.log(req.body);
-    
-    allowedFields.forEach(field=>{
-        if (req.body[field]!== undefined){
-            updatedUser[field] = req.body[field]
-        }
-    })
+    const updatedUser = req.sanitizedBody
     const newPassword = req.body.password
     if(newPassword){
         const salt = await bcrypt.genSalt(10)

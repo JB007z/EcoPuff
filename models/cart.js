@@ -23,12 +23,15 @@ cartSchema.pre('save',async function(next){
     const productIds = this.products.map(p=>{
         return p.productId
     })
-
-    const products = await Product.find({_id:{$in:productIds}})
-    if(products.length!==productIds.length){
-        throw new BadRequestError('One or more invalid products')
+    try {
+        const products = await Product.find({_id:{$in:productIds}})
+        if(products.length!==productIds.length){
+            throw new BadRequestError('One or more invalid products')
+        }
+        next()
+    } catch (error) {
+        return next(error)
     }
-    next()
 })
 
 
@@ -37,11 +40,17 @@ cartSchema.pre('findOneAndUpdate',async function(next){
     const productIds = update.products.map(p=>{
         return p.productId
     })
-    const products = await Product.find({_id:{$in:productIds}})
-    if(products.length!==productIds.length){
-        throw new BadRequestError('One or more invalid products')
+    try {
+        
+        const products = await Product.find({_id:{$in:productIds}})
+        if(products.length!==productIds.length){
+            throw new BadRequestError('One or more invalid products')
+            
+        }
+        next()
+    } catch (error) {
+        return next(error)
     }
-    next()
 
 })
 

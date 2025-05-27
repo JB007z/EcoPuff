@@ -66,6 +66,7 @@ orderSchema.pre('findOneAndUpdate',async function(next){
             throw new BadRequestError('One or more invalid products in the order(id)')
         }
           next()
+          
     } catch (error) {
         next(error)
     }
