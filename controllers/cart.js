@@ -1,11 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError } = require('../errors')
 const Cart = require('../models/cart')
-const User = require('../models/User')
 
-
-
-//Create Cart
 const createCart = async(req,res)=>{
     const {id:userId} = req.user
     const {products} = req.body

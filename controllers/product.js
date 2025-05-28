@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const {StatusCodes} = require('http-status-codes')
 const Product = require('../models/product')
 const {UnauthenticatedError,BadRequestError} = require('../errors')
@@ -29,8 +28,7 @@ const getProducts = async(req,res)=>{
 const getProduct = async(req,res)=>{
     
         const productId = req.params.id
-        try {
-            
+        try {   
             const product = await Product.findOne({_id:productId})
             if(!product){
                 throw new BadRequestError('No product with that id')
@@ -44,21 +42,7 @@ const getProduct = async(req,res)=>{
 
 const editProduct = async(req,res)=>{
     const productId = req.params.id
-   
-    const {title,desc,image,price} = req.body
-    const newProduct = {}
-    if(title){
-        newProduct.title = title
-    }
-    if(desc){
-        newProduct.desc = desc
-    }
-    if(image){
-        newProduct.image = image
-    }
-    if(price){
-        newProduct.price = price
-    }
+    const newProduct = req.sanitizedInput
     try {
         const product = await Product.findOneAndUpdate({_id:productId},{$set:newProduct},{new:true})
         if(!product){
