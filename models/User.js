@@ -49,17 +49,32 @@ userSchema.pre('save',async function(){
     }
 
     const salt = await bcrypt.genSalt(10)
-    try {
-        this.password = await bcrypt.hash(this.password,salt)
-    } catch (error) {
-        res.status(error.statusCode || 500).json({ msg: error.message });
-
-    }
+    this.password = await bcrypt.hash(this.password,salt)
+   
    
 })
 
 userSchema.pre('findOneAndUpdate',async function(){
+    console.log('Middleware running!')
     const update = this.getUpdate()
+    const username = update.$set.username
+    const email = update.$set.email
+    if (username || email){
+        const existingUser = await this.model.findOne({
+            $or:[
+                {username},{email}
+            ],
+            _id:{$ne:this._conditions._id}
+        })
+        if(existingUser){
+            if(existingUser.username===username){
+                throw new BadRequestError('This username is already being used')
+            }
+            if(existingUser.email===email){
+                throw new BadRequestError('This email is already being used')
+            }
+        }
+    }
     if (update.$set.password){
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(update.$set.password,salt)

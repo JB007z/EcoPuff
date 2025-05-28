@@ -28,15 +28,13 @@ const getUser = async(req,res)=>{
 
 const updateUser = async(req,res)=>{
     const userId = req.params.id
-    const updatedUser = req.sanitizedBody
-    const newPassword = req.body.password
-    if(newPassword){
-        const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(newPassword,salt)
-        updatedUser.password = hashedPassword
-    }    
+    const updatedUser = req.sanitizedInput
     try {
-        const newUser = await User.findOneAndUpdate({_id:userId},{$set:updatedUser},{new:true})
+        console.log(updatedUser);
+        
+        const newUser = await User.findOneAndUpdate({_id:userId},{$set:updatedUser},{returnDocument:'after'})
+        console.log(newUser);
+        
         if (!newUser){
             throw new BadRequestError('No user with that id')
         }
