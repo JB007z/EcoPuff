@@ -4,18 +4,10 @@ const Cart = require('../models/cart')
 
 const createCart = async(req,res)=>{
     const {id:userId} = req.user
-    const {products} = req.body
+    const products = req.sanitizedInput
+    console.log(products);
+    
     try {
-        
-        if(!products){
-            throw new BadRequestError('Your cart must have atleast one product')
-        }
-            const hasCart = await Cart.findOne({userId})
-            console.log(hasCart);
-            
-            if(hasCart){
-                throw new BadRequestError('User already has a cart')
-            }
             const cart = await Cart.create({userId,products})
             res.status(StatusCodes.CREATED).json({cart,msg:'Cart created'})
     } catch (error) {
@@ -50,14 +42,10 @@ const getCart = async(req,res)=>{
 
 
 const editCart = async(req,res)=>{
-    const {products} = req.body
+    const products = req.sanitizedInput
     const userId = req.params.id
     try {
-        
-        if(!products||products.length===0){
-            throw new BadRequestError('There must be products')
-        }
-        const updatedCart = await Cart.findOneAndUpdate({userId},{products},{new:true})
+        const updatedCart = await Cart.findOneAndUpdate({userId},{$set:{products}},{new:true})
         if(!updatedCart){
             throw new BadRequestError('No user with that id')
         }
