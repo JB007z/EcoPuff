@@ -1,0 +1,326 @@
+/* Reset e estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Cabeçalho - mantido mais próximo das bordas */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    height: 70px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #2e9e3e;
+}
+
+/* Seção Hero - centralizada */
+.hero {
+    background-color: #2e9e3e;
+    color: white;
+    padding: 3rem 5%;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    max-width: 50%;
+    line-height: 1.2;
+}
+
+.hero-image {
+    width: 40%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+.hero-image img {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Seção Sobre o Projeto - centralizada */
+.about-project {
+    padding: 4rem 5%;
+    background-color: #f9f9f9;
+}
+
+.about-project > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-image {
+    width: 40%;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 450px;
+}
+
+.about-content {
+    width: 50%;
+    max-width: 550px;
+}
+
+.about-content h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.about-content p {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Seção Como Funciona - centralizada */
+.how-it-works {
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.feature-icon img {
+    width: 50px;
+    height: 50px;
+}
+
+.feature-item h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Seção Benefícios - centralizada */
+.benefits {
+    padding: 4rem 5%;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.benefits h2 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.benefit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.benefit-icon {
+    width: 120px;
+    height: 120px;
+    background-color: #2e9e3e;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.benefit-icon img {
+    width: 70px;
+    height: 70px;
+    filter: brightness(0) invert(1);
+}
+
+.benefit-item p {
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* Rodapé - mantido mais próximo das bordas */
+footer {
+    padding: 2rem 5%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer-logo img {
+    height: 55px;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+    }
+    
+    .hero-content h1 {
+        max-width: 100%;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .hero-image {
+        width: 70%;
+    }
+    
+    .about-project > div {
+        flex-direction: column;
+    }
+    
+    .about-image {
+        width: 80%;
+        margin-bottom: 2rem;
+    }
+    
+    .about-content {
+        width: 90%;
+        text-align: center;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 576px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    .logo {
+        margin-bottom: 1rem;
+    }
+    
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav ul li {
+        margin: 0.5rem;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+}
