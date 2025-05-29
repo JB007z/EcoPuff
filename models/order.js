@@ -7,6 +7,7 @@ const orderSchema = new mongoose.Schema({
         required:true
     },
     products:[{
+        _id:false,
         productId:{
             type:String
         },
@@ -19,7 +20,7 @@ const orderSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    adress:{
+    address:{
         type:String,
         required:true
     },
@@ -29,48 +30,8 @@ const orderSchema = new mongoose.Schema({
 },{timestamps:true})
 
 
-orderSchema.pre('save',async function(next){
-    try {
-        
-        const productsId = this.products.map(p=>{
-            const valid = mongoose.Types.ObjectId.isValid(p.productId)
-            if(!valid){
-                throw new BadRequestError('One or more invalid products in the order(id)')
-            }
-            return p.productId
-        })
-        const products = await Product.find({_id:{$in:productsId}})
-        if(products.length!==productsId.length){
-            throw new BadRequestError('One or more invalid products in the order(id)')
-        }
-        next()
-    } catch (error) {
-        next(error)        
-    }
-    
-})
 
-orderSchema.pre('findOneAndUpdate',async function(next){
-    try {
-        const update = this.getUpdate()
-        const productIds = update.products.map(p=>{
-            const valid = mongoose.Types.ObjectId.isValid(p.productId)
-            if(!valid){
-                throw new BadRequestError('One or more invalid products in the order(id)')
-            }
 
-            return p.productId
-        })
-        const products = await Product.find({_id:{$in:productIds}})
-        if(products.length!==productIds.length){
-            throw new BadRequestError('One or more invalid products in the order(id)')
-        }
-          next()
-          
-    } catch (error) {
-        next(error)
-    }
-  
-})
+
 
 module.exports = mongoose.model('Order',orderSchema)

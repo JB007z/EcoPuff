@@ -29,6 +29,9 @@ const sanitizeInput = async(req,res,next)=>{
                 sanitizedProduct[key] = product[key]
             }
         }
+        if(!sanitizedProduct.productId){
+            throw new BadRequestError('All products must have a productId')
+        }
         req.sanitizedInput.push(sanitizedProduct)
     }
 

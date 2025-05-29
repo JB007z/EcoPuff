@@ -1,12 +1,10 @@
 const { StatusCodes } = require('http-status-codes')
-const { BadRequestError } = require('../errors')
+const { BadRequestError, NotFoundError } = require('../errors')
 const Cart = require('../models/cart')
 
 const createCart = async(req,res)=>{
     const {id:userId} = req.user
-    const products = req.sanitizedInput
-    console.log(products);
-    
+    const products = req.sanitizedInput    
     try {
             const cart = await Cart.create({userId,products})
             res.status(StatusCodes.CREATED).json({cart,msg:'Cart created'})
@@ -29,9 +27,9 @@ const getCarts = async(req,res)=>{
 const getCart = async(req,res)=>{
     const userId = req.params.id
     try {
-        const cart = await Cart.find({userId})
+        const cart = await Cart.findOne({userId})
         if(!cart){
-            throw new BadRequestError('The user doesnt have a cart or the user doesnt exist')
+            throw new NotFoundError('The user doesnt have a cart or the user doesnt exist')
     
         }
         res.status(StatusCodes.OK).json({cart})
@@ -47,7 +45,7 @@ const editCart = async(req,res)=>{
     try {
         const updatedCart = await Cart.findOneAndUpdate({userId},{$set:{products}},{new:true})
         if(!updatedCart){
-            throw new BadRequestError('No user with that id')
+            throw new NotFoundError('No user with that id')
         }
         res.status(StatusCodes.OK).json({updatedCart})
     } catch (error) {
@@ -61,7 +59,7 @@ const deleteCart = async(req,res)=>{
     try {
         const cart = await Cart.findOneAndDelete({userId})
         if(!cart){
-            throw new BadRequestError('No cart with that id')
+            throw new NotFoundError('No cart with that id')
         }
         res.status(StatusCodes.OK).json({cart,msg:'Cart deleted'})
     } catch (error) {
@@ -70,3 +68,4 @@ const deleteCart = async(req,res)=>{
     }
 }
 module.exports = {createCart,getCarts,getCart,editCart,deleteCart}
+
