@@ -1,0 +1,56 @@
+/* Global body styles */
+body {
+    font-family: 'Inter', sans-serif;
+    /* Tailwind's bg-gray-100, flex, items-center, justify-center, min-h-screen, py-12 are still applied via HTML classes */
+}
+
+/* Custom EcoPuff theme classes */
+.ecopuff-green {
+    background-color: #4CAF50; /* EcoPuff primary green */
+}
+
+.ecopuff-green-text {
+    color: #4CAF50; /* EcoPuff primary green for text */
+}
+
+.hover\:ecopuff-green-dark:hover {
+    background-color: #388E3C; /* Darker green for hover states */
+}
+
+
+
+
+/* Styling for the main submission button */
+.btn-submit {
+    /* Tailwind classes: w-full text-white font-semibold py-2.5 px-4 rounded-md shadow-md */
+    background-color: #4CAF50; /* .ecopuff-green */
+}
+
+.btn-submit:hover {
+    background-color: #388E3C; /* .hover\:ecopuff-green-dark */
+}
+
+/* Styling for auth links (e.g., "Login" link) */
+.link-auth {
+    /* Tailwind classes: font-medium hover:underline */
+    color: #4CAF50; /* .ecopuff-green-text */
+}
+
+/* Message container base styles (padding, margin, etc. are from Tailwind) */
+
+
+/* Specific styles for error messages */
+.error-message-active { /* This class will be added by JS */
+    color: #b91c1c; /* Tailwind's text-red-700 */
+    background-color: #fee2e2; /* Tailwind's bg-red-100 */
+    border: 1px solid #fca5a5; /* Tailwind's border-red-400 */
+}
+
+/* Specific styles for success messages */
+.success-message-active { /* This class will be added by JS */
+    color: #065f46; /* Tailwind's text-green-700 */
+    background-color: #d1fae5; /* Tailwind's bg-green-100 */
+    border: 1px solid #6ee7b7; /* Tailwind's border-green-400 */
+}
+
+/* You can add more specific styles or overrides here as needed */

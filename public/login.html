@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EcoPuff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"> <style>
+        /* Custom styles if needed, or to define a theme color */
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter as a nice default sans-serif font */
+        }
+        .ecopuff-green {
+            background-color: #4CAF50; /* A generic green, can be updated */
+        }
+        .ecopuff-green-text {
+            color: #4CAF50;
+        }
+        .ecopuff-green-border {
+            border-color: #4CAF50;
+        }
+        .hover\:ecopuff-green-dark:hover {
+            background-color: #388E3C; /* A darker shade for hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+        <div class="flex justify-center mb-8">
+            <img src="../styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-12">
+            
+        </div>
+
+        <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">Welcome Back!</h2>
+
+        <form action="#" method="POST">
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email Address</label>
+                <input type="email" id="email" name="email"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+                       placeholder="you@example.com" required>
+            </div>
+
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-1">
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                    <a href="#" class="text-sm ecopuff-green-text hover:underline">Forgot password?</a>
+                </div>
+                <input type="password" id="password" name="password"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-150 ease-in-out"
+                       placeholder="••••••••" required>
+            </div>
+
+            <button type="submit"
+                    class="w-full ecopuff-green hover:ecopuff-green-dark text-white font-semibold py-2.5 px-4 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                Login
+            </button>
+        </form>
+
+        <p class="text-sm text-center text-gray-600 mt-8">
+            Don't have an account?
+            <a href="#" class="font-medium ecopuff-green-text hover:underline">Sign up</a>
+        </p>
+    </div>
+
+    <script>
+        // You can add JavaScript for form validation or other interactions here if needed.
+        // For example, handling the form submission via AJAX.
+    </script>
+</body>
+</html>
