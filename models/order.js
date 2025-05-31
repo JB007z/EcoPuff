@@ -1,10 +1,13 @@
 const mongoose = require('mongoose')
+const Product = require('./product')
+const { BadRequestError } = require('../errors')
 const orderSchema = new mongoose.Schema({
     userId:{
         type:String,
         required:true
     },
     products:[{
+        _id:false,
         productId:{
             type:String
         },
@@ -17,7 +20,7 @@ const orderSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    adress:{
+    address:{
         type:String,
         required:true
     },
@@ -25,6 +28,10 @@ const orderSchema = new mongoose.Schema({
         type:String,
         default:'pending'}
 },{timestamps:true})
+
+
+
+
 
 
 module.exports = mongoose.model('Order',orderSchema)
