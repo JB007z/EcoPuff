@@ -5,24 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - EcoPuff</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico"> <style>
-        /* Custom styles if needed, or to define a theme color */
-        body {
-            font-family: 'Inter', sans-serif; /* Using Inter as a nice default sans-serif font */
-        }
-        .ecopuff-green {
-            background-color: #4CAF50; /* A generic green, can be updated */
-        }
-        .ecopuff-green-text {
-            color: #4CAF50;
-        }
-        .ecopuff-green-border {
-            border-color: #4CAF50;
-        }
-        .hover\:ecopuff-green-dark:hover {
-            background-color: #388E3C; /* A darker shade for hover */
-        }
-    </style>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico"> 
+    <link rel="stylesheet" href="./styles/auth-style.css">
+
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
@@ -32,8 +17,11 @@
         </div>
 
         <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">Welcome Back!</h2>
-
-        <form action="#" method="POST">
+        <div id="errorMessageContainer" class="mb-4 p-3 text-sm text-red-700 bg-red-100 border border-red-400 rounded-md hidden">
+        </div>
+        <div id="successMessageContainer" class="mb-4 p-3 text-sm text-green-700 bg-green-100 border border-green-400 rounded-md hidden">
+        </div>
+        <form action="#" method="POST" id="loginForm" novalidate>
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-600 mb-1">Email Address</label>
                 <input type="email" id="email" name="email"
@@ -59,13 +47,16 @@
 
         <p class="text-sm text-center text-gray-600 mt-8">
             Don't have an account?
-            <a href="#" class="font-medium ecopuff-green-text hover:underline">Sign up</a>
+            <a href="register.html" class="font-medium ecopuff-green-text hover:underline">Sign up</a>
         </p>
     </div>
+    <div id="loaderOverlay" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="loader-cog"></div>
+    </div>
 
-    <script>
-        // You can add JavaScript for form validation or other interactions here if needed.
-        // For example, handling the form submission via AJAX.
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./login.js">
+        
     </script>
 </body>
 </html>

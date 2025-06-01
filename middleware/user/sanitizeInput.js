@@ -1,4 +1,6 @@
 const allowedFields = ['username','password','email']
+
+
 const sanitizeInput = async(req,res,next)=>{
     req.sanitizedInput = {}
     allowedFields.forEach(field=>{

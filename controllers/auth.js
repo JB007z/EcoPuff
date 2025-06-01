@@ -2,19 +2,22 @@ const User = require('../models/User')
 const {BadRequestError,NotFoundError,UnauthenticatedError} = require('../errors')
 const {StatusCodes} = require('http-status-codes')
 const register = async(req,res)=>{
+        
     const {username,email,password} = req.sanitizedInput
     if (!email||!username||!password){
         throw new BadRequestError("Please provide email,username and password")
     }
-    try {
+    try {        
         const newUser = await User.create({username,email,password})
-
+        console.log(newUser);
+        
         const token = newUser.createJWT()
 
         res.status(StatusCodes.CREATED).json({token,msg:"User was created"})
 
     } catch (error) {
         res.status(error.statusCode || 500).json({ msg: error.message });
+
     }
     
 }

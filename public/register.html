@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - EcoPuff</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="./styles/auth-style.css">
     
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen py-12">
-    <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+    <div id="mainContent" class="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <div class="flex justify-center mb-8">
             <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-12">
         </div>
@@ -53,8 +53,11 @@
             <a href="login.html" class="font-medium ecopuff-green-text hover:underline">Login</a>
         </p>
     </div>
+
+    <div id="loaderOverlay" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="loader-cog"></div>
+        </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="./register.js">
-    </script>
+    <script src="./register.js"></script>
 </body>
 </html>
