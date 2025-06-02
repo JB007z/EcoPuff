@@ -69,12 +69,20 @@ const populateGrid = function(products){
         
         priceContainer.appendChild(productPrice);
         bottomWrapper.appendChild(priceContainer);
-
+        
+        const productId = product._id
         const actionButton = document.createElement('button')
         actionButton.className = 'w-full ecopuff-green hover:ecopuff-green-dark text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300'
         actionButton.textContent = 'Add to Cart'
         actionButton.addEventListener('click',()=>{
-            console.log('Placeholder for add cart function');
+            if (productId) {
+                console.log(productId);
+                
+                addToCart(productId)
+            } else {
+                console.error('Product ID is missing for this item.');
+                alert('Could not add item to cart: Product ID missing.');
+            }
             
         })
 
@@ -89,5 +97,40 @@ const populateGrid = function(products){
     })  
 
 }
+
+const addToCart = async(productId)=>{
+    const decodedToken = jwt_decode(token)
+    
+    
+    const userId = decodedToken.userId
+    const productResponse = await axios.get(`/api/v1/products/${productId}`,{headers:{'Authorization':`Bearer ${token}`}})
+    
+    const product = productResponse.data.product
+    const { _id, ...rest } = product;
+    const productWithRenamedKey = { productId: _id, ...rest };    
+    try {
+        
+        const cartResponse = await axios.get(`/api/v1/carts/${userId}`,{headers:{'Authorization':`Bearer ${token}`}})
+        
+        const updatedProducts = [...cartResponse.data.cart.products, productWithRenamedKey];
+        
+        
+       await axios.patch(`/api/v1/carts/${userId}`,{products:updatedProducts},{headers:{'Authorization':`Bearer ${token}`}})
+        
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            try {
+                 await axios.post(`/api/v1/carts/`,{userId,products:[productWithRenamedKey]},{headers:{'Authorization':`Bearer ${token}`}})
+                 
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        else{
+            console.log(error);
+            
+        }
+
+    }}
 
 getAndDisplayProducts()
