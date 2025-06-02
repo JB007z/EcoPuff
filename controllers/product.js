@@ -11,6 +11,8 @@ const addProduct = async(req,res)=>{
         const product = await Product.create({title,desc,image,price})
         res.status(StatusCodes.CREATED).json({product})
     } catch (error) {
+        console.log(error);
+        
         res.status(error.statusCode || 500).json({ msg: error.message })
         
     }

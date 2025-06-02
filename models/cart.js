@@ -26,7 +26,7 @@ cartSchema.pre('save',async function(next){
     if(hasCart){
         throw new BadRequestError('User already has a cart')
     }
-    next()
+    
 })
 
 

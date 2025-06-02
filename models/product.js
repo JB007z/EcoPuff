@@ -31,7 +31,6 @@ productSchema.pre('save',async function(){
     if(existingProduct){
         throw new BadRequestError('This product already exists')
     }
-    next()
 })
 
 productSchema.pre('findOneAndUpdate',async function(){

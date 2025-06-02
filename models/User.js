@@ -55,7 +55,6 @@ userSchema.pre('save',async function(){
 })
 
 userSchema.pre('findOneAndUpdate',async function(){
-    console.log('Middleware running!')
     const update = this.getUpdate()
     const username = update.$set.username
     const email = update.$set.email
