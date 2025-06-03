@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/auth-style.css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-10 mr-3">
+                <span class="font-semibold text-xl ecopuff-green-text"></span>
+            </div>
+            <nav class="space-x-4">
+                <a href="index.html" class="text-gray-600 hover:ecopuff-green-text">Home</a>
+                <a href="products.html" class="text-gray-600 hover:ecopuff-green-text">Products</a>
+                <a href="cart.html" class="ecopuff-green-text font-semibold">Cart</a> <a href="login.html" class="text-gray-600 hover:ecopuff-green-text">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 flex-grow">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-10">Your Shopping Cart</h1>
+
+    <div id="cartPageContent"> 
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-lg shadow-md">
+                   
+                    <div id="cartItemsContainer">
+                        <p class="p-6 text-center text-gray-500">Loading your cart items...</p>
+                    </div>
+                </div>
+
+           
+                <div id="emptyCartMessage" class="text-center py-12 hidden bg-white rounded-lg shadow-md mt-6">
+                    <i class="fas fa-shopping-cart fa-3x text-gray-400 mb-4"></i> 
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-3">Your Cart is Empty</h2>
+                    <p class="text-gray-500 mb-6">Looks like you haven't added anything to your cart yet.</p>
+                    <a href="products.html"
+                       class="ecopuff-green hover:ecopuff-green-dark text-white font-semibold py-3 px-6 rounded-md shadow-md">
+                        Shop Products
+                    </a>
+                </div>
+
+                <div class="mt-6 text-right">
+                    <a href="products.html" class="text-ecopuff-green-text hover:underline font-semibold">
+                        &larr; Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:w-1/3">
+                <div id="orderSummaryContainer" class="bg-white rounded-lg shadow-md p-6 sticky top-6">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-6 border-b border-gray-200 pb-4">Order Summary</h2>
+
+    
+                <div class="space-y-3 text-gray-700">
+                    <div class="flex justify-between">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal">$0.00</span> 
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Shipping</span>
+                        <span id="cartShipping">$0.00</span> 
+                    </div>
+                </div>
+
+            
+                <div class="border-t border-gray-200 mt-4 pt-4">
+                    <div class="flex justify-between font-semibold text-gray-800 text-lg">
+                        <span>Total</span>
+                        <span id="cartTotal">$0.00</span>
+                    </div>
+                </div>
+
+            
+                <button id="checkoutButton" 
+                        class="w-full mt-8 ecopuff-green hover:ecopuff-green-dark text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                    Proceed to Checkout
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <footer class="bg-gray-800 text-white text-center p-6 mt-12">
+        <div class="container mx-auto">
+            <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-8 mx-auto mb-2 opacity-75">
+            <p>&copy; <span id="currentYear"></span> EcoPuff. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-1">Committed to a greener puff.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./cart.js">
+        
+    </script>
+</body>
+</html>
