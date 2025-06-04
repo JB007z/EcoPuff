@@ -1,11 +1,15 @@
 const productsDOM = document.getElementById('products')
 const token = localStorage.getItem('token')
+const decodedToken = jwt_decode(token)
+const userId = decodedToken.userId
+
+let cartIds = new Set()
 
 const getAndDisplayProducts = async()=>{
     if(token){
 
         try {
-            
+            await checkCart()
             const response = await axios.get('/api/v1/products',{headers:{
                 'Authorization':`Bearer ${token}`
             }})
@@ -29,6 +33,7 @@ const getAndDisplayProducts = async()=>{
 
 const populateGrid = function(products){
     productsDOM.innerHTML=""
+    
     products.forEach(product=>{
         const card = document.createElement('div')
         card.className = 'bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 flex flex-col';
@@ -73,12 +78,22 @@ const populateGrid = function(products){
         const productId = product._id
         const actionButton = document.createElement('button')
         actionButton.className = 'w-full ecopuff-green hover:ecopuff-green-dark text-white font-semibold py-2 px-4 rounded-md shadow-md transition-colors duration-300'
-        actionButton.textContent = 'Add to Cart'
+
+        if(cartIds.has(productId)){
+            actionButton.textContent = 'Product added to cart';
+            actionButton.disabled = true;
+        }
+        else{
+            actionButton.textContent = 'Add to Cart'
+        }
+        
         actionButton.addEventListener('click',()=>{
             if (productId) {
-                console.log(productId);
-                
                 addToCart(productId)
+                actionButton.textContent = 'Product added to cart';
+                actionButton.disabled = true;  // Optional for UX
+                
+                
             } else {
                 console.error('Product ID is missing for this item.');
                 alert('Could not add item to cart: Product ID missing.');
@@ -99,10 +114,6 @@ const populateGrid = function(products){
 }
 
 const addToCart = async(productId)=>{
-    const decodedToken = jwt_decode(token)
-    
-    
-    const userId = decodedToken.userId
     const productResponse = await axios.get(`/api/v1/products/${productId}`,{headers:{'Authorization':`Bearer ${token}`}})
     
     const product = productResponse.data.product
@@ -114,6 +125,7 @@ const addToCart = async(productId)=>{
         
         const updatedProducts = [...cartResponse.data.cart.products, productWithRenamedKey];
         
+        console.log(updatedProducts);
         
        await axios.patch(`/api/v1/carts/${userId}`,{products:updatedProducts},{headers:{'Authorization':`Bearer ${token}`}})
         
@@ -132,5 +144,28 @@ const addToCart = async(productId)=>{
         }
 
     }}
+const checkCart = async () => {
+    cartIds = new Set(); // Reset before each check
+    if (!token || !userId) { // Use the globally initialized and validated token/userId
+        console.log("User not authenticated, cannot check cart.");
+        return; // cartIds remains empty
+    }
+    try {
+        const cartResponse = await axios.get(`/api/v1/carts/${userId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (cartResponse.data && cartResponse.data.cart && cartResponse.data.cart.products) {
+            const productsInCart = cartResponse.data.cart.products;
+            productsInCart.forEach(p => cartIds.add(p.productId));
+            console.log("Cart IDs populated:", cartIds);
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            console.log('No cart found for user, or cart is empty.'); // This is fine, cartIds remains empty
+        } else {
+            console.error('Error fetching cart in checkCart:', error);
+        }
+    }
+};
 
 getAndDisplayProducts()
