@@ -254,4 +254,4 @@ const checkPrice = async()=>{
     }
 }
 
-loadCart()
+document.addEventListener('DOMContentLoaded',loadCart())

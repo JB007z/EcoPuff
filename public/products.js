@@ -167,5 +167,4 @@ const checkCart = async () => {
         }
     }
 };
-
-getAndDisplayProducts()
+document.addEventListener('DOMContentLoaded',getAndDisplayProducts())
