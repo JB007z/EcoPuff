@@ -5,7 +5,9 @@ const token = localStorage.getItem('token')
 const decodedToken = jwt_decode(token)
 const userId = decodedToken.userId
 const shippingPrice = 10 
-
+if(!token){
+    window.location.replace('login-required.html')
+}
 const loadCart = async()=>{
     const totalPrice = await checkPrice()
     

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - EcoPuff</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./styles/auth-style.css"> 
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico"> 
+    <style>
+        /* Small style to hide dropdown initially if no JS, JS will control it better */
+        .profile-dropdown-menu.hidden-initially {
+            display: none;
+        }
+        /* Additional style for active nav link if on this page */
+        /* You might handle this with JS, but for pure HTML example: */
+        /* #profileDropdownMenu #userProfileLink {
+            background-color: #f3f4f6; 
+            color: #4CAF50; 
+        } */
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 sm:py-4 flex justify-between items-center">
+            
+            <div class="flex items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-9 sm:h-10 mr-2 sm:mr-3">
+                    <span class="font-semibold text-lg sm:text-xl ecopuff-green-text">EcoPuff</span>
+                </a>
+            </div>
+
+            
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                <nav class="hidden sm:flex space-x-3 sm:space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Home</a>
+                    <a href="products.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Products</a>
+                    <a href="cart.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Cart</a>
+                </nav>
+
+                <a href="login.html" id="loginLink" class="text-sm sm:text-base ecopuff-green-text hover:underline font-semibold px-3 py-2 rounded-md">Login</a>
+
+                <div class="relative hidden" id="profileDropdownContainer">
+                    <button id="profileDropdownButton" type="button" class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ecopuff-green p-1 hover:bg-gray-100">
+                        <span class="sr-only">Open user menu</span>
+                        <svg class="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                    </button>
+                    <div id="profileDropdownMenu"
+                         class="profile-dropdown-menu hidden-initially origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                         role="menu" aria-orientation="vertical" aria-labelledby="profileDropdownButton" tabindex="-1">
+                        <a href="user-profile.html" class="block px-4 py-2 text-sm text-ecopuff-green-text bg-gray-100 font-semibold" role="menuitem" tabindex="-1" id="userProfileLink">My Account</a> 
+                        <a href="order-history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem" tabindex="-1" id="orderHistoryLink">Order History</a>
+                        <button type="button" id="logoutButton" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" role="menuitem" tabindex="-1">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+                 <button id="mobileMenuButton" class="sm:hidden p-2 rounded-md text-gray-600 hover:text-ecopuff-green-text hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ecopuff-green">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-3.75 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="sm:hidden hidden" id="mobileMenu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Home</a>
+                <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Products</a>
+                <a href="cart.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Cart</a>
+            </div>
+        </div>
+    </header>
+
+    
+    <main class="container mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8 text-center sm:text-left">My Account</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            
+            <div class="md:col-span-1 hidden md:block">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Account Navigation</h2>
+                    <nav class="space-y-2">
+                        <a href="user-profile.html" class="flex items-center px-3 py-2 text-sm text-ecopuff-green-text bg-green-50 rounded-md font-medium">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
+                            Profile Information
+                        </a>
+                        <a href="order-history.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
+                            Order History
+                        </a>
+                        <a href="manage-address.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                            Manage Addresses
+                        </a>
+                         <a href="change-password.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
+                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zm-6 9a8 8 0 100-16 8 8 0 000 16zm0-3a1 1 0 001-1V9a1 1 0 10-2 0v4a1 1 0 001 1z" clip-rule="evenodd" /></svg>
+                           Change Password
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            
+            <div class="md:col-span-2">
+                
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-6 sm:mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl font-semibold text-gray-700">Personal Information</h2>
+                        <a href="#" class="text-sm ecopuff-green-text hover:underline font-medium">Edit</a>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500">Full Name</label>
+                            <p class="mt-1 text-md text-gray-800">[User's Full Name]</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500">Email Address</label>
+                            <p class="mt-1 text-md text-gray-800">[user@example.com]</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-500">Phone Number</label>
+                            <p class="mt-1 text-md text-gray-800">[+1 234 567 8900 (Optional)]</p>
+                        </div>
+                        <div class="pt-2">
+                             <a href="change-password.html" class="text-sm ecopuff-green-text hover:underline font-medium">Change Password</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-6 sm:mb-8">
+                     <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-semibold text-gray-700">Recent Orders</h2>
+                        <a href="order-history.html" class="text-sm ecopuff-green-text hover:underline font-medium">View All</a>
+                    </div>
+                    
+                    <p class="text-gray-600">You have no recent orders.</p>
+                    
+                </div>
+
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6">
+        <div class="container mx-auto">
+            <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-8 mx-auto mb-2 opacity-75">
+            <p>&copy; <span id="currentYear"></span> EcoPuff. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-1">Committed to a greener puff.</p>
+        </div>
+    </footer>

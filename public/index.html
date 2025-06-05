@@ -1,119 +1,176 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoPuff - Turning E-Waste into Innovation</title>
-    <link rel="stylesheet" href="./styles/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script> 
+    
+    <link rel="stylesheet" href="./styles/style.css"> 
+     <link rel="stylesheet" href="./styles/auth-style.css">     
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <style>
+        /* Small style to hide dropdown initially if no JS, JS will control it better */
+        .profile-dropdown-menu.hidden-initially {
+            display: none;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo">
+<body>      
+
+    
+<header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-3 sm:py-4 flex justify-between items-center">
+        
+        <div class="flex items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-9 sm:h-10 mr-2 sm:mr-3">
+            </a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">About</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="cart.html">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Transforming E-Cigarette Waste into Educational Opportunities</h1>
-                <div class="hero-image">
-                    <img src="./styles/img/content-1-vape.png" alt="EcoPuff device with plants, symbolizing eco-friendliness">
+        <div class="flex items-center space-x-3 sm:space-x-5">
+            <nav class="hidden sm:flex space-x-3 sm:space-x-4">
+                
+                <a href="index.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Home</a>
+                <a href="products.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Products</a>
+                <a href="cart.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Cart</a>
+            </nav>
+
+            <a href="login.html" id="loginLink" class="text-sm sm:text-base ecopuff-green-text hover:underline font-semibold px-3 py-2 rounded-md">Login</a>
+
+            <div class="relative hidden" id="profileDropdownContainer">
+                <button id="profileDropdownButton" type="button" class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ecopuff-green p-1 hover:bg-gray-100">
+                    <span class="sr-only">Open user menu</span>
+                    <svg class="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    </svg>
+                </button>
+                <div id="profileDropdownMenu"
+                        class="profile-dropdown-menu hidden-initially origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                        role="menu" aria-orientation="vertical" aria-labelledby="profileDropdownButton" tabindex="-1">
+                    <a href="user-profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem" tabindex="-1" id="userProfileLink">My Account</a>
+                    <a href="order-history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem" tabindex="-1" id="orderHistoryLink">Order History</a>
+                    <button type="button" id="logoutButton" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" role="menuitem" tabindex="-1">
+                        Logout
+                    </button>
                 </div>
             </div>
-        </section>
-
-        <section class="about-project">
-            <div>
-                <div class="about-image">
-                    <img src="./styles/img/content-2-vape.png" alt="Hands holding a plant in a container, representing growth and recycling">
-                </div>
-                <div class="about-content">
-                    <h2>About the Project</h2>
-                    <p>EcoPuff is dedicated to tackling electronic waste by transforming discarded e-cigarettes into valuable educational kits. Our primary audience includes schools and social institutions interested in purchasing or renting these kits. Each kit comes with comprehensive guides, empowering students and participants in social projects to assemble various useful items and develop crucial technological skills. We aim to make a positive social impact by fostering innovation and learning, while also contributing to a healthier environment.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="how-it-works">
-            <h2>How It Works</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <img src="./styles/img/coleta-inteligente-icon.png" alt="Collection icon">
-                    </div>
-                    <h3>Responsible Collection</h3>
-                    <p>We focus on establishing effective channels for collecting discarded e-cigarettes to ensure a steady supply for recycling.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <img src="./styles/img/desmontagem-icon.png" alt="Disassembly icon">
-                    </div>
-                    <h3>Safe Disassembly</h3>
-                    <p>E-cigarettes are carefully disassembled, separating components like batteries, plastic, and electronics for proper processing.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <img src="./styles/img/reciclagem-icon.png" alt="Recycling icon">
-                    </div>
-                    <h3>Technical Recycling</h3>
-                    <p>Recovered materials are processed and recycled, preparing them for a new life as components in our educational kits.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <img src="./styles/img/reutilizacao-icon.png" alt="Educational reuse icon">
-                    </div>
-                    <h3>Educational Reuse</h3>
-                    <p>Recycled components are assembled into kits designed for educational projects, such as rechargeable LED lanterns or power banks, complete with assembly guides.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="benefits">
-            <h2>Benefits</h2>
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <img src="./styles/img/reducao-icon.png" alt="Waste reduction icon">
-                    </div>
-                    <p>Significant Reduction of E-Waste</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <img src="./styles/img/reaproveitamento-icon.png" alt="Intelligent reuse icon">
-                    </div>
-                    <p>Smart Reuse of Materials</p>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <img src="./styles/img/economia-icon.png" alt="Circular economy icon">
-                    </div>
-                    <p>Promoting a Circular Economy</p>
-                </div>
-                <div class="benefit-item"> 
-                    <div class="benefit-icon">
-                         <img src="./styles/img/reutilizacao-icon.png" alt="Skill development icon"> 
-                    </div>
-                    <p>Fostering Tech Skills & Environmental Awareness</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>ecopuff@gmail.com.br</p>
-        <div class="footer-logo">
-            <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo">
+                <button id="mobileMenuButton" class="sm:hidden p-2 rounded-md text-gray-600 hover:text-ecopuff-green-text hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ecopuff-green">
+                <span class="sr-only">Open main menu</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-3.75 5.25h16.5" />
+                </svg>
+            </button>
         </div>
-    </footer>
+    </div>
+    <div class="sm:hidden hidden" id="mobileMenu">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Home</a>
+            <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Products</a>
+            <a href="cart.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-ecopuff-green-text hover:bg-gray-50">Cart</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transforming E-Cigarette Waste into Educational Opportunities</h1>
+            <div class="hero-image">
+                <img src="./styles/img/content-1-vape.png" alt="EcoPuff device with plants, symbolizing eco-friendliness">
+            </div>
+        </div>
+    </section>
+
+    <section class="about-project">
+        <div>
+            <div class="about-image">
+                <img src="./styles/img/content-2-vape.png" alt="Hands holding a plant in a container, representing growth and recycling">
+            </div>
+            <div class="about-content">
+                <h2>About the Project</h2>
+                <p>EcoPuff is dedicated to tackling electronic waste by transforming discarded e-cigarettes into valuable educational kits. Our primary audience includes schools and social institutions interested in purchasing or renting these kits. Each kit comes with comprehensive guides, empowering students and participants in social projects to assemble various useful items and develop crucial technological skills. We aim to make a positive social impact by fostering innovation and learning, while also contributing to a healthier environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="./styles/img/coleta-inteligente-icon.png" alt="Collection icon">
+                </div>
+                <h3>Responsible Collection</h3>
+                <p>We focus on establishing effective channels for collecting discarded e-cigarettes to ensure a steady supply for recycling.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="./styles/img/desmontagem-icon.png" alt="Disassembly icon">
+                </div>
+                <h3>Safe Disassembly</h3>
+                <p>E-cigarettes are carefully disassembled, separating components like batteries, plastic, and electronics for proper processing.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="./styles/img/reciclagem-icon.png" alt="Recycling icon">
+                </div>
+                <h3>Technical Recycling</h3>
+                <p>Recovered materials are processed and recycled, preparing them for a new life as components in our educational kits.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <img src="./styles/img/reutilizacao-icon.png" alt="Educational reuse icon">
+                </div>
+                <h3>Educational Reuse</h3>
+                <p>Recycled components are assembled into kits designed for educational projects, such as rechargeable LED lanterns or power banks, complete with assembly guides.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <h2>Benefits</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <img src="./styles/img/reducao-icon.png" alt="Waste reduction icon">
+                </div>
+                <p>Significant Reduction of E-Waste</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <img src="./styles/img/reaproveitamento-icon.png" alt="Intelligent reuse icon">
+                </div>
+                <p>Smart Reuse of Materials</p>
+            </div>
+            <div class="benefit-item">
+                <div class="benefit-icon">
+                    <img src="./styles/img/economia-icon.png" alt="Circular economy icon">
+                </div>
+                <p>Promoting a Circular Economy</p>
+            </div>
+            <div class="benefit-item"> 
+                <div class="benefit-icon">
+                        <img src="./styles/img/reutilizacao-icon.png" alt="Skill development icon"> 
+                </div>
+                <p>Fostering Tech Skills & Environmental Awareness</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>ecopuff@gmail.com.br</p>
+    <div class="footer-logo">
+        <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo">
+    </div>
+</footer>
+
+<script src="./index.js">
+    
+
+</script>
 </body>
 </html>
