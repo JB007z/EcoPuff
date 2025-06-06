@@ -31,14 +31,12 @@ const updateUser = async(req,res)=>{
     const updatedUser = req.sanitizedInput
     try {
         console.log(updatedUser);
-        
-        const newUser = await User.findOneAndUpdate({_id:userId},{$set:updatedUser},{returnDocument:'after'})
-        console.log(newUser);
-        
+        const newUser = await User.findOneAndUpdate({_id:userId},{$set:updatedUser},{new:true})        
         if (!newUser){
             throw new BadRequestError('No user with that id')
         }
-        res.status(StatusCodes.OK).json({newUser,msg:'User edited'})
+        const token = newUser.createJWT()
+        res.status(StatusCodes.OK).json({newUser,token,msg:'User edited'})
     } catch (error) {
         res.status(error.statusCode || 500).json({ msg: error.message })
         

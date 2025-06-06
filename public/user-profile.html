@@ -28,7 +28,7 @@
             <div class="flex items-center">
                 <a href="index.html" class="flex items-center">
                     <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-9 sm:h-10 mr-2 sm:mr-3">
-                    <span class="font-semibold text-lg sm:text-xl ecopuff-green-text">EcoPuff</span>
+                    <span class="font-semibold text-lg sm:text-xl ecopuff-green-text"></span>
                 </a>
             </div>
 
@@ -117,19 +117,21 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-500">Full Name</label>
-                            <p class="mt-1 text-md text-gray-800">[User's Full Name]</p>
+                            <p id="username"class="mt-1 text-md text-gray-800">Username</p>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-500">Email Address</label>
-                            <p class="mt-1 text-md text-gray-800">[user@example.com]</p>
+                            <p id="email"class="mt-1 text-md text-gray-800">[user@example.com]</p>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-500">Phone Number</label>
-                            <p class="mt-1 text-md text-gray-800">[+1 234 567 8900 (Optional)]</p>
-                        </div>
+                        
                         <div class="pt-2">
                              <a href="change-password.html" class="text-sm ecopuff-green-text hover:underline font-medium">Change Password</a>
                         </div>
+                        <div id="confirmChangesContainer" class="hidden mt-6 text-right">
+                        <button id="confirmChangesButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Confirm changes
+                        </button>
+                        </div>  
                     </div>
                 </div>
 
@@ -156,3 +158,6 @@
             <p class="text-sm text-gray-400 mt-1">Committed to a greener puff.</p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./user-profile.js"></script>
