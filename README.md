@@ -33,16 +33,16 @@ The idea originated from a **Hackathon** challenge where participants were asked
 - MongoDB (local or cloud via MongoDB Atlas)
 
 ### 📥 Installation
-On your terminal:
-1.Clone the repo:
-git clone https://github.com/your-username/ecopuff.git
-cd ecopuff
-npm install
+## On your terminal:
+# 1.Clone the repo:
+- git clone https://github.com/your-username/ecopuff.git
+- cd ecopuff
+- npm install
 
-2.Create a .env file with these variables (you need to get your own mongoUrl from mongoDB):
-MONGO_URL=mongodb+srv://user:password@cluster.mongodb.net/ecopuff?retryWrites=true&w=majority
-JWT_SECRET=yourSuperSecretAndLongKeyHere 
-PORT=3000
+# 2.Create a .env file with these variables (you need to get your own mongoUrl from mongoDB and PORT is up to youm it will run on 3000 on default if not defined):
+- MONGO_URL=mongodb+srv://user:password@cluster.mongodb.net/ecopuff?retryWrites=true&w=majority
+- JWT_SECRET=yourSuperSecretAndLongKeyHere 
+- PORT=3000
 
-3. Start the development server:
-run npm start on your terminal
+# 3. Start the development server:
+- run npm start on your terminal
