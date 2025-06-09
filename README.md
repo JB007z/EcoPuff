@@ -39,7 +39,7 @@ The idea originated from a **Hackathon** challenge where participants were asked
 - cd ecopuff
 - npm install
 
-### 2.Create a .env file with these variables (you need to get your own mongoUrl from mongoDB and PORT is up to youm it will run on 3000 on default if not defined):
+### 2.Create a .env file with these variables (Only the mongo url and Jwt secret are really necessary) 
 - MONGO_URL=mongodb+srv://user:password@cluster.mongodb.net/ecopuff?retryWrites=true&w=majority
 - JWT_SECRET=yourSuperSecretAndLongKeyHere 
 - PORT=3000
