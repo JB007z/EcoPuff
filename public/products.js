@@ -2,11 +2,10 @@
 const productsDOM = document.getElementById('products')
 const token = localStorage.getItem('token')
 if(!token){
-    window.location.replace('loging-required.html')
+    window.location.replace('login-required.html')
 }
 const decodedToken = jwt_decode(token)
 const userId = decodedToken.userId
-
 let cartIds = new Set()
 document.addEventListener('DOMContentLoaded',async()=>{
 

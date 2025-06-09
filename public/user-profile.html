@@ -34,15 +34,14 @@
 
             
             <div class="flex items-center space-x-3 sm:space-x-5">
-                <nav class="hidden sm:flex space-x-3 sm:space-x-4">
-                    <a href="index.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Home</a>
-                    <a href="products.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Products</a>
-                    <a href="cart.html" class="text-gray-600 hover:ecopuff-green-text px-2 py-1 rounded-md">Cart</a>
-                </nav>
+                <nav class="flex items-center space-x-6">
+                <div class="flex space-x-4">
+                    <a href="index.html" class="text-gray-600 hover:text-ecopuff-green-text">Home</a>
+                    <a href="products.html" class="ecopuff-green-text font-semibold">Products</a>
+                    <a href="cart.html" class="text-gray-600 hover:text-ecopuff-green-text">Cart</a>
+                </div>
 
-                <a href="login.html" id="loginLink" class="text-sm sm:text-base ecopuff-green-text hover:underline font-semibold px-3 py-2 rounded-md">Login</a>
-
-                <div class="relative hidden" id="profileDropdownContainer">
+                <div class="relative" id="profileDropdownContainer">
                     <button id="profileDropdownButton" type="button" class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ecopuff-green p-1 hover:bg-gray-100">
                         <span class="sr-only">Open user menu</span>
                         <svg class="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -50,21 +49,15 @@
                         </svg>
                     </button>
                     <div id="profileDropdownMenu"
-                         class="profile-dropdown-menu hidden-initially origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
-                         role="menu" aria-orientation="vertical" aria-labelledby="profileDropdownButton" tabindex="-1">
-                        <a href="user-profile.html" class="block px-4 py-2 text-sm text-ecopuff-green-text bg-gray-100 font-semibold" role="menuitem" tabindex="-1" id="userProfileLink">My Account</a> 
-                        <a href="order-history.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem" tabindex="-1" id="orderHistoryLink">Order History</a>
-                        <button type="button" id="logoutButton" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" role="menuitem" tabindex="-1">
+                        class="profile-dropdown-menu hidden-initially origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+                        role="menu" aria-orientation="vertical" aria-labelledby="profileDropdownButton" tabindex="-1">
+                        <a href="user-profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem">My Account</a>
+                        <button type="button" id="logoutButton" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" role="menuitem">
                             Logout
                         </button>
                     </div>
                 </div>
-                 <button id="mobileMenuButton" class="sm:hidden p-2 rounded-md text-gray-600 hover:text-ecopuff-green-text hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ecopuff-green">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-3.75 5.25h16.5" />
-                    </svg>
-                </button>
+            </nav>
             </div>
         </div>
         <div class="sm:hidden hidden" id="mobileMenu">
@@ -82,29 +75,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             
-            <div class="md:col-span-1 hidden md:block">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-lg font-semibold text-gray-700 mb-4">Account Navigation</h2>
-                    <nav class="space-y-2">
-                        <a href="user-profile.html" class="flex items-center px-3 py-2 text-sm text-ecopuff-green-text bg-green-50 rounded-md font-medium">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" /></svg>
-                            Profile Information
-                        </a>
-                        <a href="order-history.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" /><path fill-rule="evenodd" d="M4 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd" /></svg>
-                            Order History
-                        </a>
-                        <a href="manage-address.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
-                            Manage Addresses
-                        </a>
-                         <a href="change-password.html" class="flex items-center px-3 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-ecopuff-green-text rounded-md">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 8a6 6 0 11-12 0 6 6 0 0112 0zm-6 9a8 8 0 100-16 8 8 0 000 16zm0-3a1 1 0 001-1V9a1 1 0 10-2 0v4a1 1 0 001 1z" clip-rule="evenodd" /></svg>
-                           Change Password
-                        </a>
-                    </nav>
-                </div>
-            </div>
+            
 
             
             <div class="md:col-span-2">
@@ -112,7 +83,6 @@
                 <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-6 sm:mb-8">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-semibold text-gray-700">Personal Information</h2>
-                        <a href="#" class="text-sm ecopuff-green-text hover:underline font-medium">Edit</a>
                     </div>
                     <div class="space-y-4">
                         <div>
@@ -124,9 +94,7 @@
                             <p id="email"class="mt-1 text-md text-gray-800">[user@example.com]</p>
                         </div>
                         
-                        <div class="pt-2">
-                             <a href="change-password.html" class="text-sm ecopuff-green-text hover:underline font-medium">Change Password</a>
-                        </div>
+                        
                         <div id="confirmChangesContainer" class="hidden mt-6 text-right">
                         <button id="confirmChangesButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                             Confirm changes
@@ -139,7 +107,6 @@
                 <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-6 sm:mb-8">
                      <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-semibold text-gray-700">Recent Orders</h2>
-                        <a href="order-history.html" class="text-sm ecopuff-green-text hover:underline font-medium">View All</a>
                     </div>
                     
                     <p class="text-gray-600">You have no recent orders.</p>
@@ -161,3 +128,4 @@
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./user-profile.js"></script>
+    <script src="./profileDropdown.js"></script>

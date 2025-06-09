@@ -16,12 +16,31 @@
                 <img src="./styles/img/ecopuff-logo.png" alt="EcoPuff Logo" class="h-10 mr-3">
                 
             </div>
-            <nav class="space-x-4">
-                <a href="index.html" class="text-gray-600 hover:ecopuff-green-text">Home</a>
-                <a href="products.html" class="ecopuff-green-text font-semibold">Products</a>
-                <a href="cart.html" class="text-gray-600 hover:ecopuff-green-text">Cart</a>
-                <a href="login.html" class="text-gray-600 hover:ecopuff-green-text">Login</a>
-                </nav>
+            <nav class="flex items-center space-x-6">
+    <div class="flex space-x-4">
+        <a href="index.html" class="text-gray-600 hover:text-ecopuff-green-text">Home</a>
+        <a href="products.html" class="ecopuff-green-text font-semibold">Products</a>
+        <a href="cart.html" class="text-gray-600 hover:text-ecopuff-green-text">Cart</a>
+    </div>
+
+    <div class="relative" id="profileDropdownContainer" class="relative hidden">
+        <button id="profileDropdownButton" type="button" class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ecopuff-green p-1 hover:bg-gray-100">
+            <span class="sr-only">Open user menu</span>
+            <svg class="h-7 w-7 sm:h-8 sm:w-8 rounded-full text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+        </button>
+        <div id="profileDropdownMenu"
+             class="profile-dropdown-menu hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
+             role="menu" aria-orientation="vertical" aria-labelledby="profileDropdownButton" tabindex="-1">
+            <a href="user-profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-ecopuff-green-text" role="menuitem">My Account</a>
+            <button type="button" id="logoutButton" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600" role="menuitem">
+                Logout
+            </button>
+        </div>
+    </div>
+</nav>
+
         </div>
     </header>
 
@@ -55,8 +74,8 @@
     
 <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
     <script src="./products.js" ></script>
+    <script src="./profileDropdown.js"></script>
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>

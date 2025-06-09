@@ -2,12 +2,14 @@ const cartDOM = document.getElementById('cartItemsContainer')
 const subtotalDOM = document.getElementById('cartSubtotal')
 const totalDOM = document.getElementById('cartTotal')
 const token = localStorage.getItem('token')
-const decodedToken = jwt_decode(token)
-const userId = decodedToken.userId
-const shippingPrice = 10 
 if(!token){
     window.location.replace('login-required.html')
 }
+
+const decodedToken = jwt_decode(token)
+const userId = decodedToken.userId
+const shippingPrice = 10 
+
 const loadCart = async()=>{
     const totalPrice = await checkPrice()
     
@@ -142,8 +144,6 @@ const loadCart = async()=>{
         
     } catch (error) {
         if(error.response.status===404){
-            
-            
             cartDOM.innerHTML=`<div id="emptyCartMessage" class="text-center py-16 px-6 bg-white rounded-lg shadow-md">
   
             <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-16 w-16 text-gray-400 mb-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
@@ -162,6 +162,7 @@ const loadCart = async()=>{
         </div>`
                 
     }
+    
 }}
 
 const removeFromCart = async(productId)=>{
@@ -189,8 +190,13 @@ const removeFromCart = async(productId)=>{
         loadCart()
         
     } catch (error) {
-        console.log(error);
         
+        if(error.response.status===401){
+        window.location.replace('./errors/unauthorized.html')
+    }
+        if(error.response.status===500){
+        window.location.replace('./errors/internal.html')
+    }
     }
 }
 
@@ -198,7 +204,6 @@ const increaseQuantity = async(productId)=>{
     try {
         const cartResponse = await axios.get(`/api/v1/carts/${userId}`,{headers:{'Authorization':`Bearer ${token}`}})
         const cartProducts = cartResponse.data.cart.products
-        let total = 0
         const newCartProducts = cartProducts.map(p=>{
             if (p.productId ===productId){
                 p.quantity +=1
@@ -211,9 +216,14 @@ const increaseQuantity = async(productId)=>{
         
     } catch (error) {
         console.log(error);
+         if(error.response.status===401){
+        window.location.replace('./errors/unauthorized.html')
+        }
+        if(error.response.status===500){
+        window.location.replace('./errors/internal.html')
+        }
         
-        
-    }
+        }
     
 }
 
@@ -233,7 +243,15 @@ const decreaseQuantity = async(productId)=>{
         
     } catch (error) {
         console.log(error);
-        
+         if(error.response.status===401){
+        window.location.replace('./errors/unauthorized.html')
+    }
+        if(error.response.status===403){
+            window.location.replace('./errors/notFound.html')
+        }
+        if(error.response.status===500){
+        window.location.replace('./errors/internal.html')
+    }
         
     }
 }
@@ -252,8 +270,16 @@ const checkPrice = async()=>{
         return price
     } catch (error) {
         console.log(error);
-        
+        if(error.response.status===401){
+        window.location.replace('./errors/unauthorized.html')
+    }
+        if(error.response.status===403){
+            window.location.replace('./errors/notFound.html')
+        }
+        if(error.response.status===500){
+        window.location.replace('./errors/internal.html')
+    }
     }
 }
 
-document.addEventListener('DOMContentLoaded',loadCart())
+loadCart()
