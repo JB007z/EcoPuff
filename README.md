@@ -46,3 +46,11 @@ The idea originated from a **Hackathon** challenge where participants were asked
 
 ### 3. Start the development server:
 - run npm start on your terminal
+
+
+
+## 🚧 Known Issues
+- Support for android users isnt really implemented in some pages
+- No real payment gateway is implemented
+- "Forgot Password" feature is missing
+- Order history functionality is under development
